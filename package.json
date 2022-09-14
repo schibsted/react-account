@@ -13,7 +13,8 @@
   "author": "Sverre Norberg-Schulz Hagen",
   "license": "MIT",
   "publishConfig": {
-    "registry": "https://registry.npmjs.org"
+    "registry": "https://registry.npmjs.org",
+    "access": "public"
   },
   "dependencies": {
     "@schibsted/account-sdk-browser": "^4.6.0"
