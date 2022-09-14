@@ -1,0 +1,34 @@
+name: release
+
+on:
+  push:
+    branches:
+      - main
+
+# Grant permissions to GITHUB_TOKEN
+permissions:
+  contents: write # Allow adding commit, creating git tag, and Github release
+  issues: write # Allow adding comments on released issues
+  pull-requests: write # Allow adding comments on released pull requests
+
+jobs:
+  release:
+    runs-on: ubuntu-latest
+
+    steps:
+      - name: Checkout
+        uses: actions/checkout@v3
+
+      - name: Install Node.js
+        uses: actions/setup-node@v3
+        with:
+          node-version-file: ".nvmrc"
+
+      - name: Install NPM packages
+        run: npm clean-install
+
+      - name: Publish NPM module and create Github release
+        run: npx semantic-release
+        env:
+          GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
+          NPM_TOKEN: ${{ secrets.NPM_TOKEN }}

@@ -1,0 +1,49 @@
+{
+  "name": "@schibsted/react-account",
+  "version": "1.0.0",
+  "main": "index.js",
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/schibsted/react-account.git"
+  },
+  "description": "React Context Provider and Hook making it easier to use Schibsted Account in your React app",
+  "keywords": [
+    "account"
+  ],
+  "author": "Sverre Norberg-Schulz Hagen",
+  "license": "MIT",
+  "publishConfig": {
+    "registry": "https://registry.npmjs.org"
+  },
+  "dependencies": {
+    "@schibsted/account-sdk-browser": "^4.6.0"
+  },
+  "devDependencies": {
+    "@semantic-release/git": "^10.0.1"
+  },
+  "peerDependencies": {
+    "react": ">=16.8"
+  },
+  "release": {
+    "branches": [
+      "main"
+    ],
+    "plugins": [
+      "@semantic-release/commit-analyzer",
+      "@semantic-release/release-notes-generator",
+      "@semantic-release/npm",
+      "@semantic-release/github",
+      [
+        "@semantic-release/git",
+        {
+          "assets": [
+            "package.json",
+            "package-lock.json"
+          ],
+          "message": "release(version): ${nextRelease.version} [skip ci]\n\n${nextRelease.notes}"
+        }
+      ]
+    ],
+    "tagFormat": "${version}"
+  }
+}
