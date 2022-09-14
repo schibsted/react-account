@@ -1,2 +1,2 @@
-export { default, AccountContext } from "./lib/AccountProvider.js";
-export { default as useAccount } from "./lib/useAccount.js";
+export { AccountProvider, AccountContext } from "./lib/AccountProvider.js";
+export { useAccount } from "./lib/useAccount.js";
