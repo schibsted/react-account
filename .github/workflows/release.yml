@@ -27,6 +27,9 @@ jobs:
       - name: Install NPM packages
         run: npm clean-install
 
+      - name: Build NPM module
+        run: npm run build
+
       - name: Publish NPM module and create Github release
         run: npx semantic-release
         env:
