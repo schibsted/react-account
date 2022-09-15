@@ -4,7 +4,7 @@ export default {
   input: "index.js",
   output: {
     file: "dist/index.js",
-    format: "cjs"
+    format: "es"
   },
   external: ["react", "@schibsted/account-sdk-browser"],
   plugins: [
