@@ -1,2 +1,3 @@
-export { AccountProvider, AccountContext } from "./lib/AccountProvider.js";
-export { useAccount } from "./lib/useAccount.js";
+export { AccountProvider, AccountContext } from "./AccountProvider.js";
+export { Identity } from "./Identity.js";
+export { useAccount } from "./useAccount.js";

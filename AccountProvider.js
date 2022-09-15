@@ -5,6 +5,7 @@ import React, {
   useMemo,
   useLayoutEffect,
 } from "react";
+import { Identity } from "./Identity";
 
 function publishEvents() {
   window.dispatchEvent(
@@ -14,7 +15,7 @@ function publishEvents() {
   );
 }
 
-function initIdentity(Identity, { identity, varnish }) {
+function initIdentity({ identity, varnish }) {
   const instance = new Identity(identity);
   window.Identity = instance;
   varnish && identity.enableVarnishCookie(varnish);
@@ -28,13 +29,13 @@ function initIdentity(Identity, { identity, varnish }) {
 }
 
 const useIsomorphicLayoutEffect =
-  typeof window != "undefined" ? useLayoutEffect : useEffect;
+  typeof window !== "undefined" ? useLayoutEffect : useEffect;
 
 export const AccountContext = createContext();
 
-export const AccountProvider = ({ Identity, config, children }) => {
+export const AccountProvider = ({ config, children }) => {
   const account = useMemo(
-    () => typeof window != "undefined" && initIdentity(Identity, config),
+    () => typeof window !== "undefined" && initIdentity(config),
     []
   );
   const [user, setUser] = useState(null);
