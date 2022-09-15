@@ -18,7 +18,7 @@
   "author": "Sverre Norberg-Schulz Hagen",
   "license": "MIT",
   "scripts": {
-    "build": "esbuild *.js --bundle --minify --external:react --outdir=dist"
+    "build": "esbuild *.js --bundle --minify --format=esm --external:react --outdir=dist"
   },
   "keywords": [
     "account"
