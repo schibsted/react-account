@@ -1,21 +1,27 @@
-import { useContext } from "react";
+import { useContext, useCallback } from "react";
 
 import { AccountContext } from "./AccountProvider.js";
 
 export const useAccount = () => {
   const { account, user } = useContext(AccountContext);
 
-  function login(redirectUrl = window.location.href) {
-    account.login({ redirectUrl, state: Math.random().toString(16) });
-  }
+  const login = useCallback(
+    function login(redirectUrl = window.location.href) {
+      account.login({ redirectUrl, state: Math.random().toString(16) });
+    },
+    [account]
+  );
 
-  function logout() {
-    account.logout();
-  }
+  const logout = useCallback(
+    function logout() {
+      account.logout();
+    },
+    [account]
+  );
 
   return {
     login,
     logout,
     user,
   };
-}
+};

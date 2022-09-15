@@ -7,6 +7,8 @@ import React, {
 } from "react";
 import { Identity } from "./Identity";
 
+const isBrowser = window === "undefined";
+
 function publishEvents() {
   window.dispatchEvent(
     new window.CustomEvent("identity-initialized", {
@@ -18,7 +20,7 @@ function publishEvents() {
 function initIdentity({ identity, varnish }) {
   const instance = new Identity(identity);
   window.Identity = instance;
-  varnish && identity.enableVarnishCookie(varnish);
+  varnish && instance.enableVarnishCookie(varnish);
 
   instance
     .hasSession()
@@ -28,16 +30,12 @@ function initIdentity({ identity, varnish }) {
   return instance;
 }
 
-const useIsomorphicLayoutEffect =
-  typeof window !== "undefined" ? useLayoutEffect : useEffect;
+const useIsomorphicLayoutEffect = isBrowser ? useLayoutEffect : useEffect;
 
 export const AccountContext = createContext();
 
 export const AccountProvider = ({ config, children }) => {
-  const account = useMemo(
-    () => typeof window !== "undefined" && initIdentity(config),
-    []
-  );
+  const account = useMemo(() => isBrowser && initIdentity(config), []);
   const [user, setUser] = useState(null);
 
   useIsomorphicLayoutEffect(() => {
@@ -68,7 +66,7 @@ export const AccountProvider = ({ config, children }) => {
   return React.createElement(
     AccountContext.Provider,
     {
-      value: value,
+      value,
     },
     children
   );
