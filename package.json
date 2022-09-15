@@ -8,6 +8,9 @@
     ".": "./dist/index.js",
     "./*.js": "./dist/*.js"
   },
+  "files": [
+    "/dist"
+  ],
   "repository": {
     "type": "git",
     "url": "git+https://github.com/schibsted/react-account.git"
