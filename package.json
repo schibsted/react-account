@@ -27,10 +27,8 @@
     "registry": "https://registry.npmjs.org",
     "access": "public"
   },
-  "dependencies": {
-    "@schibsted/account-sdk-browser": "^4.6.0"
-  },
   "devDependencies": {
+    "@schibsted/account-sdk-browser": "^4.6.0",
     "@semantic-release/git": "^10.0.1",
     "esbuild": "^0.15.7"
   },
