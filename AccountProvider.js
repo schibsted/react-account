@@ -7,7 +7,7 @@ import React, {
 } from "react";
 import { Identity } from "./Identity";
 
-const isBrowser = window === "undefined";
+const isBrowser = typeof window !== "undefined";
 
 function publishEvents() {
   window.dispatchEvent(
