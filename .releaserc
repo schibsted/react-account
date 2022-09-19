@@ -14,7 +14,7 @@
           "package.json",
           "package-lock.json"
         ],
-        "message": "release(version): ${nextRelease.version} [skip ci]\n\n${nextRelease.notes}"
+        "message": "chore: Release version ${nextRelease.version}\n\n${nextRelease.notes}"
       }
     ]
   ],
