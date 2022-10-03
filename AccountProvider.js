@@ -5,7 +5,7 @@ import React, {
   useMemo,
   useLayoutEffect,
 } from "react";
-import { Identity } from "./Identity";
+import { Identity } from "./Identity.js";
 
 const isBrowser = typeof window !== "undefined";
 

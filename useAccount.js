@@ -20,6 +20,7 @@ export const useAccount = () => {
   );
 
   return {
+    account,
     login,
     logout,
     user,
