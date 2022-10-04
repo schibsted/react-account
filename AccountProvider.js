@@ -22,7 +22,7 @@ function initIdentity({ identity, varnish, pulse = false }) {
   window.Identity = instance;
   varnish && instance.enableVarnishCookie(varnish);
 
-  const promise = identity.hasSession();
+  const promise = instance.hasSession();
 
   if (pulse && window.pulse) {
     window.pulse("update", {
