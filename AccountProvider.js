@@ -17,15 +17,25 @@ function publishEvents() {
   );
 }
 
-function initIdentity({ identity, varnish }) {
+function initIdentity({ identity, varnish, pulse = false }) {
   const instance = new Identity(identity);
   window.Identity = instance;
   varnish && instance.enableVarnishCookie(varnish);
 
-  instance
-    .hasSession()
-    .then(publishEvents)
-    .catch(() => false);
+  const promise = identity.hasSession();
+
+  if (pulse && window.pulse) {
+    window.pulse("update", {
+      actor: promise
+        .then((session) => ({
+          id: session.userId,
+          realm: "spid.no",
+        }))
+        .catch(() => false),
+    });
+  }
+
+  promise.then(publishEvents).catch(() => false);
 
   return instance;
 }
