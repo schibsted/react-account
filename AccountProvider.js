@@ -46,6 +46,7 @@ export const AccountContext = createContext();
 
 export const AccountProvider = ({ config, children }) => {
   const account = useMemo(() => isBrowser && initIdentity(config), []);
+  const [isLoggedIn, setIsLoggedIn] = useState(null);
   const [user, setUser] = useState(null);
 
   useIsomorphicLayoutEffect(() => {
@@ -58,10 +59,11 @@ export const AccountProvider = ({ config, children }) => {
       .then((session) => {
         if (session.result) {
           setUser(session);
+          setIsLoggedIn(true);
         }
       })
       .catch(() => {
-        return false;
+        setIsLoggedIn(false);
       });
   }, [account]);
 
@@ -69,8 +71,9 @@ export const AccountProvider = ({ config, children }) => {
     () => ({
       account,
       user,
+      isLoggedIn,
     }),
-    [account, user]
+    [account, user, isLoggedIn]
   );
 
   return React.createElement(
