@@ -3,7 +3,7 @@ import { useContext, useCallback } from "react";
 import { AccountContext } from "./AccountProvider.js";
 
 export const useAccount = () => {
-  const { account, user } = useContext(AccountContext);
+  const { account, user, isLoggedIn } = useContext(AccountContext);
 
   const login = useCallback(
     function login(redirectUrl = window.location.href) {
@@ -23,5 +23,6 @@ export const useAccount = () => {
     login,
     logout,
     user,
+    isLoggedIn,
   };
 };
