@@ -7,10 +7,10 @@ export const useAccount = () => {
 
   const login = useCallback(
     function login({
-      redirectUrl = window.location.href,
+      redirectUri = window.location.href,
       state = Math.random().toString(16),
     }) {
-      account.login({ redirectUrl, state });
+      account.login({ redirectUri, state });
     },
     [account]
   );
