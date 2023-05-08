@@ -6,6 +6,7 @@ import React, {
   useLayoutEffect,
 } from "react";
 import { Identity } from "./Identity.js";
+import { hasAccess } from "./hasAccess.js";
 
 const isBrowser = typeof window !== "undefined";
 
@@ -45,7 +46,8 @@ const useIsomorphicLayoutEffect = isBrowser ? useLayoutEffect : useEffect;
 export const AccountContext = createContext();
 
 export const AccountProvider = ({ config, children }) => {
-  const account = useMemo(() => isBrowser && initIdentity(config), []);
+  const account = useMemo(() => isBrowser && initIdentity(rest), []);
+  const [access, setAccess] = useState(null);
   const [isLoggedIn, setIsLoggedIn] = useState(null);
   const [user, setUser] = useState(null);
 
@@ -60,20 +62,25 @@ export const AccountProvider = ({ config, children }) => {
         if (session.result) {
           setUser(session);
           setIsLoggedIn(true);
+          hasAccess(session.sp_id, config.access).then((access) => {
+            setAccess(access);
+          });
         }
       })
       .catch(() => {
+        setAccess(false);
         setIsLoggedIn(false);
       });
   }, [account]);
 
   const value = useMemo(
     () => ({
+      hasAccess: access,
       account,
       user,
       isLoggedIn,
     }),
-    [account, user, isLoggedIn]
+    [access, account, user, isLoggedIn]
   );
 
   return React.createElement(

@@ -95,6 +95,22 @@ const config = {
 };
 ```
 
+### Access restriction check
+
+In order to check if the logged in user has access to your subscription products, your config should contain your source (i.e. the publisher) and your product ids.
+
+```js
+const config = {
+  identity: {
+    ...
+  },
+  access: {
+    pids: ['abc123', 'def456'],
+    source: 'vg.no'
+  }
+};
+```
+
 ## Contributing
 
 Everyone is welcome to contribute to this repository. Feel free to [create issues](https://github.com/schibsted/react-account/issues) or to [submit Pull Requests](https://github.com/schibsted/react-account/pulls).
