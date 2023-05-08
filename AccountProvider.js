@@ -46,7 +46,7 @@ const useIsomorphicLayoutEffect = isBrowser ? useLayoutEffect : useEffect;
 export const AccountContext = createContext();
 
 export const AccountProvider = ({ config, children }) => {
-  const account = useMemo(() => isBrowser && initIdentity(rest), []);
+  const account = useMemo(() => isBrowser && initIdentity(config), []);
   const [access, setAccess] = useState(null);
   const [isLoggedIn, setIsLoggedIn] = useState(null);
   const [user, setUser] = useState(null);
