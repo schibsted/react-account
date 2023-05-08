@@ -97,7 +97,7 @@ const config = {
 
 ### Access restriction check
 
-In order to check if the logged in user has access to your subscription products, your config should contain your source (i.e. the publisher) and your product ids.
+In order to check if the logged in user has access to your subscription products, your config should contain your source (i.e. the publisher), your product ids and optionally the access-domain (defaults to access.schibsted.digital).
 
 ```js
 const config = {
@@ -106,7 +106,8 @@ const config = {
   },
   access: {
     pids: ['abc123', 'def456'],
-    source: 'vg.no'
+    source: 'vg.no',
+    domain: 'access.your.domain'
   }
 };
 ```
