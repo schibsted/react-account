@@ -4,7 +4,7 @@ async function hasSubscription(sp_id, config) {
   if (!promise) {
     const req = fetch(
       `https://${
-        config.domain || access.schibsted.digital
+        config.domain || "access.schibsted.digital"
       }/v1/access?pids=${config.pids.join(",")}&spid_instance=spid.no&source=${
         config.source
       }&sp_id=${sp_id}`
