@@ -1,6 +1,6 @@
 {
   "name": "@schibsted/react-account",
-  "version": "1.8.0",
+  "version": "1.8.1",
   "description": "React Context Provider and Hook making it easier to use Schibsted Account in your React app",
   "type": "module",
   "main": "./dist/index.js",
