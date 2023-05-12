@@ -47,9 +47,11 @@ export const AccountContext = createContext();
 
 export const AccountProvider = ({ config, children }) => {
   const account = useMemo(() => isBrowser && initIdentity(config), []);
-  const [access, setAccess] = useState(null);
-  const [isLoggedIn, setIsLoggedIn] = useState(null);
-  const [user, setUser] = useState(null);
+  const [session, setSession] = useState({
+    access: null,
+    isLoggedIn: null,
+    user: null,
+  });
 
   useIsomorphicLayoutEffect(() => {
     if (!account) {
@@ -60,27 +62,24 @@ export const AccountProvider = ({ config, children }) => {
       .hasSession()
       .then((session) => {
         if (session.result) {
-          setUser(session);
-          setIsLoggedIn(true);
           hasAccess(session.sp_id, config.access).then((access) => {
-            setAccess(access);
+            setSession({ user: session, isLoggedIn: true, access });
           });
         }
       })
       .catch(() => {
-        setAccess(false);
-        setIsLoggedIn(false);
+        setSession({ user: null, isLoggedIn: false, access: false });
       });
   }, [account]);
 
   const value = useMemo(
     () => ({
-      hasAccess: access,
+      hasAccess: session.access,
       account,
-      user,
-      isLoggedIn,
+      user: session.user,
+      isLoggedIn: session.isLoggedIn,
     }),
-    [access, account, user, isLoggedIn]
+    [session.access, account, session.user, session.isLoggedIn]
   );
 
   return React.createElement(

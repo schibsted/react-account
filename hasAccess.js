@@ -26,7 +26,7 @@ export async function hasAccess(sp_id, config) {
       return true;
     }
   } catch (err) {
-    // silent catch
+    console.error(err);
   }
   return false;
 }
