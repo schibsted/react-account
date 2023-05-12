@@ -3,7 +3,13 @@ import { useContext, useCallback } from "react";
 import { AccountContext } from "./AccountProvider.js";
 
 export const useAccount = () => {
-  const { account, user, isLoggedIn } = useContext(AccountContext);
+  const context = useContext(AccountContext);
+
+  if (context === undefined) {
+    throw new Error("useAccount must be used within an AccountProvider");
+  }
+
+  const { account, hasAccess, isLoggedIn, user } = context;
 
   const login = useCallback(
     function login({
@@ -23,9 +29,10 @@ export const useAccount = () => {
   );
 
   return {
+    hasAccess,
+    isLoggedIn,
     login,
     logout,
     user,
-    isLoggedIn,
   };
 };
